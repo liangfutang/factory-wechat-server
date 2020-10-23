@@ -2,49 +2,105 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <groupId>com.zjut.factory.server</groupId>
+    <artifactId>factory-wechat-server</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>factory-wechat-server</name>
     <packaging>pom</packaging>
+    <description>project for wechat or others public server</description>
+
     <modules>
         <module>boot</module>
         <module>biz</module>
         <module>config</module>
         <module>common</module>
     </modules>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.4.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    <groupId>com.zjut.factory.server</groupId>
-    <artifactId>factory-wechat-server</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <name>factory-wechat-server</name>
-    <description>project for wechat or others public server</description>
 
     <properties>
         <java.version>1.8</java.version>
+        <factory-wechat-server.version>1.0.0-SNAPSHOT</factory-wechat-server.version>
+        <project-starter.version>1.0.0-SNAPSHOT</project-starter.version>
+        <project-common.version>1.0-SNAPSHOT</project-common.version>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <!--自定义starter或其他相关包 start-->
+            <dependency>
+                <groupId>com.zjut.spring.boot</groupId>
+                <artifactId>project-spring-boot-dependencies</artifactId>
+                <version>${project-starter.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.zjut.common</groupId>
+                        <artifactId>project-common</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.zjut.common</groupId>
+                <artifactId>project-common</artifactId>
+                <version>${project-common.version}</version>
+            </dependency>
+            <!--自定义starter或其他相关包 end-->
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-    </dependencies>
+            <!--子模块 start-->
+            <dependency>
+                <groupId>com.zjut.factory.server</groupId>
+                <artifactId>server-biz</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zjut.factory.server</groupId>
+                <artifactId>server-boot</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zjut.factory.server</groupId>
+                <artifactId>server-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zjut.factory.server</groupId>
+                <artifactId>server-config</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--子模块 end-->
+        </dependencies>
+    </dependencyManagement>
+
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -63,4 +119,33 @@
         </plugins>
     </build>
 
+    <!--下载的仓库-->
+    <repositories>
+        <repository>
+            <id>rdc-releases</id>
+            <url>https://repo.rdc.aliyun.com/repository/134225-release-yPqXef/</url>
+        </repository>
+        <repository>
+            <id>rdc-snapshots</id>
+            <url>https://repo.rdc.aliyun.com/repository/134225-snapshot-0sOQAO/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>
+                    interval:1
+                </updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <!--上传到该库中-->
+    <distributionManagement>
+        <repository>
+            <id>rdc-releases</id>
+            <url>https://repo.rdc.aliyun.com/repository/134225-release-yPqXef/</url>
+        </repository>
+        <snapshotRepository>
+            <id>rdc-snapshots</id>
+            <url>https://repo.rdc.aliyun.com/repository/134225-snapshot-0sOQAO/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
