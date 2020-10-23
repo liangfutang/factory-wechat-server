@@ -4,15 +4,12 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlCData;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.Map;
 
-@Setter@Getter@ToString
+@Data
 @JacksonXmlRootElement(localName = "xml")
-public class BaseMessage {
+public abstract class BaseMessage {
 
 	@JacksonXmlCData
 	@JacksonXmlProperty(localName = "ToUserName")
@@ -20,7 +17,6 @@ public class BaseMessage {
 	@JacksonXmlCData
 	@JacksonXmlProperty(localName = "FromUserName")
 	private String fromUserName;
-//	@JacksonXmlCData
 	@JacksonXmlProperty(localName = "CreateTime")
 	private String createTime;
 	/**
@@ -30,7 +26,7 @@ public class BaseMessage {
 	@JacksonXmlProperty(localName = "MsgType")
 	private String msgType;
 
-	public BaseMessage(Map<String, String> requestMap, String msgType) {
+	BaseMessage(Map<String, String> requestMap, String msgType) {
 		this.toUserName=requestMap.get("FromUserName");
 		this.fromUserName=requestMap.get("ToUserName");
 		this.createTime=System.currentTimeMillis()/1000+"";
