@@ -1,14 +1,19 @@
 package com.zjut.factory.server.controller;
 
+import com.zjut.factory.server.biz.manage.WechatMsgManage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -18,6 +23,9 @@ public class WechatController {
      * 绑定微信公众号时在微信端配置的token(随机设置的，此处需与微信端的保持一致)
      */
     private final String TOKEN = "abc";
+
+    @Autowired
+    private WechatMsgManage wechatMsgManage;
 
     /**
      * 验证消息的确来自微信服务器,初次绑定后，微信端需要向后端发送验证请求
@@ -54,5 +62,18 @@ public class WechatController {
         }
 
         return "接入失败";
+    }
+
+    /**
+     * 接收公众号中用户发过来的消息,内部处理后返回xml格式
+     * @param data
+     * @return
+     */
+    @PostMapping(value = "/wechat/officialaccounts/init", produces = "application/xml;charset=utf8")
+    public Object invokeMessage(@RequestBody String data) {
+        log.info("接收到公众号的消息:{}", data);
+        Object resp = wechatMsgManage.getResp(data);
+        log.info("处理完即将返回给公众号的内容:{}", resp);
+        return resp;
     }
 }

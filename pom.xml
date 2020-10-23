@@ -28,6 +28,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
+        <dom4j.version>1.6.1</dom4j.version>
+        <jackson-dataformat-xml.version>2.9.9</jackson-dataformat-xml.version>
     </properties>
 
     <dependencyManagement>
@@ -75,6 +77,21 @@
                 <version>${project.version}</version>
             </dependency>
             <!--子模块 end-->
+
+            <!--第三方依赖 start-->
+            <!--解析xml-->
+            <dependency>
+                <groupId>dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>${dom4j.version}</version>
+            </dependency>
+            <!--xml和pojo的转换-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>${jackson-dataformat-xml.version}</version>
+            </dependency>
+            <!--第三方依赖 end-->
         </dependencies>
     </dependencyManagement>
 
