@@ -12,4 +12,10 @@ public interface CommConstants extends Constants {
     String MSG_ID = "MsgId";
 
     String IMAGE = "image";
+    String VOICE = "voice";
+    String VIDEO = "video";
+    String SHORT_VIDEO = "shortvideo";
+    String LOCATION = "location";
+    String LINK = "link";
+    String EVENT = "event";
 }

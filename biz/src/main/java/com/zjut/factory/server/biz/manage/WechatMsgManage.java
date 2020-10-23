@@ -48,47 +48,7 @@ public class WechatMsgManage {
             log.error("处理内部业务异常");
         }
 
-//        switch (msgType){
-//            case "text":
-//                return dealText(data);
-//            case "image":
-//
-//            case "voice":
-//
-//                break;
-//            case "video":
-//
-//                break;
-//            case "shortvideo":
-//
-//                break;
-//            case "location":
-//
-//                break;
-//            case "link":
-//
-//                break;
-//            case "event":
-//
-//                break;
-//            default:
-//                return this.getDefaultErrorResp(data, "没有该种消息格式");
-//        }
-
         return this.getDefaultErrorResp(data, "服务内部异常");
-    }
-
-    /**
-     *处理文本消息
-     * @param map
-     * @return
-     */
-    private Object dealText(Map<String, String> map) {
-        TextMessage tm = new TextMessage(map, "点击<a href=\"www.baidu.com\">这里</a>登录");
-        tm.setToUserName(map.get("FromUserName"));
-        tm.setFromUserName(map.get("ToUserName"));
-        tm.setCreateTime(System.currentTimeMillis()/1000+"");
-        return tm;
     }
 
     /**
@@ -105,30 +65,4 @@ public class WechatMsgManage {
         return tm;
     }
 
-    /**
-     * 解析公众号传进来的xml消息
-     * @return
-     */
-    private Map<String,String> parseWechatMsg(String data) {
-        Map<String,String> map = new HashMap<>(8);
-
-        Document document = null;
-        try {
-            document = DocumentHelper.parseText(data);
-        } catch (Exception e) {
-            log.error("解析传进来的xml异常", e);
-        }
-        if (document == null) {
-            return map;
-        }
-        Element root = document.getRootElement();
-        if (root == null) {
-            return map;
-        }
-        List<Element> elements = root.elements();
-        for(Element e:elements){
-            map.put(e.getName(), e.getStringValue());
-        }
-        return map;
-    }
 }
