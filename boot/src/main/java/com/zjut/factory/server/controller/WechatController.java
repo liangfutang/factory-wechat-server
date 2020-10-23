@@ -69,8 +69,8 @@ public class WechatController {
      * @param data
      * @return
      */
-    @PostMapping(value = "/wechat/officialaccounts/init", produces = "application/xml;charset=utf8")
-    public Object invokeMessage(@RequestBody String data) {
+    @PostMapping(value = "/wechat/officialaccounts/init", consumes = "text/xml", produces = "application/xml;charset=utf8")
+    public Object invokeMessage(@RequestBody Map<String, String> data) {
         log.info("接收到公众号的消息:{}", data);
         Object resp = wechatMsgManage.getResp(data);
         log.info("处理完即将返回给公众号的内容:{}", resp);
