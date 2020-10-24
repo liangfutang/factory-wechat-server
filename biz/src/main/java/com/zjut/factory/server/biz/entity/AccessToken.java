@@ -1,16 +1,16 @@
 package com.zjut.factory.server.biz.entity;
 
-import lombok.Data;
+import lombok.Getter;
 
 /**
  * 获取到的某个微信公众号token
  */
-@Data
 public class AccessToken {
 
     /**
      * 有效token
      */
+    @Getter
     private String accessToken;
     /**
      * 失效时间
