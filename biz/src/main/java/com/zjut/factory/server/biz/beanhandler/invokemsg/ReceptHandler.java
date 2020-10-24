@@ -1,4 +1,4 @@
-package com.zjut.factory.server.biz.manage.beanhandler.invokemsg;
+package com.zjut.factory.server.biz.beanhandler.invokemsg;
 
 import java.util.Map;
 

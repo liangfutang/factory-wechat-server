@@ -1,4 +1,4 @@
-package com.zjut.factory.server.biz.manage.entity.msg;
+package com.zjut.factory.server.biz.entity.msg;
 
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlCData;

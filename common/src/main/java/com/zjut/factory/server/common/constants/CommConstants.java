@@ -10,6 +10,9 @@ public interface CommConstants extends Constants {
     String MSG_TYPE = "MsgType";
     String TEXT = "text";
     String MSG_ID = "MsgId";
+    String FROM_USER_NAME = "FromUserName";
+    String TO_USER_NAME = "ToUserName";
+    String CONTENT = "Content";
 
     String IMAGE = "image";
     String VOICE = "voice";

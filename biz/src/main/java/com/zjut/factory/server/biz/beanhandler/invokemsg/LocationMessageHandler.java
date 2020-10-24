@@ -1,4 +1,4 @@
-package com.zjut.factory.server.biz.manage.beanhandler.invokemsg;
+package com.zjut.factory.server.biz.beanhandler.invokemsg;
 
 import com.zjut.factory.server.common.constants.CommConstants;
 import org.springframework.stereotype.Component;
@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * 小视频类型消息处理器
+ * 地理位置类型消息处理器
  */
-@Component(CommConstants.SHORT_VIDEO)
-public class ShortVideoMessageHandler implements ReceptHandler {
+@Component(CommConstants.LOCATION)
+public class LocationMessageHandler implements ReceptHandler {
     @Override
     public Object invokeHandler(Map<String, String> data) {
         return null;

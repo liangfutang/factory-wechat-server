@@ -1,4 +1,4 @@
-package com.zjut.factory.server.biz.manage.beanhandler.invokemsg;
+package com.zjut.factory.server.biz.beanhandler.invokemsg;
 
 import com.zjut.factory.server.common.constants.CommConstants;
 import org.springframework.stereotype.Component;

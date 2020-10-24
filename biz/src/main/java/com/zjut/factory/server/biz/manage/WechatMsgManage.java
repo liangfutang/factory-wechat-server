@@ -1,18 +1,13 @@
 package com.zjut.factory.server.biz.manage;
 
-import com.zjut.factory.server.biz.manage.beanhandler.invokemsg.ReceptHandler;
-import com.zjut.factory.server.biz.manage.entity.msg.TextMessage;
+import com.zjut.factory.server.biz.beanhandler.invokemsg.ReceptHandler;
+import com.zjut.factory.server.biz.entity.msg.TextMessage;
 import com.zjut.factory.server.common.constants.CommConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
