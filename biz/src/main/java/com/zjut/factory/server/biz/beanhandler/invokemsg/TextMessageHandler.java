@@ -1,5 +1,7 @@
 package com.zjut.factory.server.biz.beanhandler.invokemsg;
 
+import com.alibaba.fastjson.JSONObject;
+import com.zjut.common.constants.Constants;
 import com.zjut.common.utils.HttpClientUtil;
 import com.zjut.factory.server.biz.entity.msg.BaseMessage;
 import com.zjut.factory.server.biz.entity.msg.TextMessage;
@@ -23,7 +25,7 @@ public class TextMessageHandler implements ReceptHandler {
         String contentStr = data.get(CommConstants.CONTENT);
         String content = StringUtils.isBlank(contentStr) ? "你好" : contentStr;
         // 拿出回复
-        String answer = this.getAnswer(content);
+        String answer = this.chat(content);
         log.info("拿到的回复:" + answer);
         return this.getResp(data, answer);
     }
@@ -33,8 +35,7 @@ public class TextMessageHandler implements ReceptHandler {
      * @param fromMessage
      * @return
      */
-    private String getAnswer(String fromMessage) {
-        String answer = "";
+    private String chat(String fromMessage) {
         String url ="http://op.juhe.cn/robot/index";
         Map params = new HashMap();
         params.put("key","1fec136dbd19f44743803f89bd55ca62");//您申请到的本接口专用的APPKEY
@@ -47,7 +48,20 @@ public class TextMessageHandler implements ReceptHandler {
 
         try {
             String httpGet = HttpClientUtil.getHttpGet(url, params, null, 5000, 5000, 5000);
-
+            log.info("请求智能回复的结果:" + httpGet);
+            if (StringUtils.isNotBlank(httpGet)) {
+                JSONObject jsonObject = JSONObject.parseObject(httpGet);
+                Integer errorCode = jsonObject.getInteger(CommConstants.ERROR_CODE);
+                if (0==errorCode) {
+                    JSONObject result = jsonObject.getJSONObject(Constants.RESULT);
+                    if (null != result) {
+                        String text = result.getString(CommConstants.TEXT);
+                        if (StringUtils.isNotBlank(text)) {
+                            return text;
+                        }
+                    }
+                }
+            }
         } catch (Exception e) {
             log.error("获取只能回复异常", e);
         }

@@ -5,7 +5,7 @@ import com.zjut.common.constants.Constants;
 /**
  * 常用的常量
  */
-public interface CommConstants extends Constants {
+public interface CommConstants {
 
     String MSG_TYPE = "MsgType";
     String TEXT = "text";
@@ -21,4 +21,6 @@ public interface CommConstants extends Constants {
     String LOCATION = "location";
     String LINK = "link";
     String EVENT = "event";
+
+    String ERROR_CODE = "error_code";
 }
