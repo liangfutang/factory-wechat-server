@@ -13,6 +13,7 @@ public interface CommConstants {
     String FROM_USER_NAME = "FromUserName";
     String TO_USER_NAME = "ToUserName";
     String CONTENT = "Content";
+    String E_EVENT = "Event";
 
     String IMAGE = "image";
     String VOICE = "voice";
