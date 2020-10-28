@@ -22,9 +22,11 @@ public class EventMessageHandler implements ReceptHandler {
 
         BaseMessage result = null;
         switch (event) {
+            // 关注公众号事件
             case "subscribe" :
                 result = this.getResp(data, "关注成功");
                 break;
+            // 取消公众号关注事件
             case "unsubscribe":
                 result = this.getResp(data, "取关成功");
                 break;
