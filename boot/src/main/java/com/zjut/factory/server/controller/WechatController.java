@@ -1,14 +1,12 @@
 package com.zjut.factory.server.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zjut.factory.server.biz.manage.WechatMsgManage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,5 +73,13 @@ public class WechatController {
         Object resp = wechatMsgManage.getResp(data);
         log.info("处理完即将返回给公众号的内容:{}", resp);
         return resp;
+    }
+
+    @DeleteMapping("/delete/test")
+    public Object testDelete(@RequestBody(required = false) Map<String, String> param) {
+        log.info("删除测试进来的参数:" + param);
+        JSONObject result = new JSONObject();
+        result.put("testKey", "testValue");
+        return result;
     }
 }
